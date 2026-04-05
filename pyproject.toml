@@ -1,0 +1,43 @@
+[tool.poetry]
+name = "recsys"
+version = "0.1.0"
+description = "Event-driven recommendation engine with LLM re-ranking"
+authors = ["pinkcar203 <prithikashrikannan@gmail.com>"]
+readme = "README.md"
+packages = [
+    { include = "common" },
+    { include = "ingestion_service", from = "." },
+    { include = "consumer_service", from = "." },
+    { include = "recommendation_api", from = "." },
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.115.0"
+uvicorn = {extras = ["standard"], version = "^0.34.0"}
+pydantic = "^2.10.0"
+pydantic-settings = "^2.7.0"
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.36"}
+asyncpg = "^0.30.0"
+alembic = "^1.14.0"
+aiokafka = "^0.12.0"
+redis = {extras = ["hiredis"], version = "^5.2.0"}
+httpx = "^0.28.0"
+structlog = "^24.4.0"
+groq = "^0.15.0"
+prometheus-client = "^0.24.1"
+numpy = "<2"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.0"
+pytest-asyncio = "^0.25.0"
+pytest-cov = "^6.0.0"
+testcontainers = {extras = ["kafka", "postgres", "redis"], version = "^4.9.0"}
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

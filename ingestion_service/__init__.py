@@ -1,0 +1,1 @@
+"""Event ingestion FastAPI service."""
